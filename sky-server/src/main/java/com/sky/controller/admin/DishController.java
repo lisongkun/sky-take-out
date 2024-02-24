@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @Classname DishController
  * @Description 菜品管理控制器
@@ -51,6 +53,13 @@ public class DishController {
     public Result<PageResult> page(DishPageQueryDTO dto) {
         PageResult pageResult = dishService.page(dto);
         return Result.success(pageResult);
+    }
+
+    @ApiOperation(value = "批量删除菜品")
+    @DeleteMapping
+    public Result delete(@RequestParam List<Integer> ids) {
+        dishService.delete(ids);
+        return Result.success();
     }
 }
 
