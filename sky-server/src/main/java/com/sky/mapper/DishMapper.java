@@ -44,7 +44,7 @@ public interface DishMapper {
      * @return
      */
     @Select("SELECT * FROM dish WHERE id = #{id}")
-    Dish getDishById(Integer id);
+    Dish getDishById(Long id);
 
     /**
      * 根据菜品ID删除菜品
@@ -52,5 +52,11 @@ public interface DishMapper {
      * @param id
      */
     @Delete("DELETE FROM dish WHERE id = #{id}")
-    void deleteById(Integer id);
+    void deleteById(Long id);
+
+    /**
+     * 根据菜品信息
+     * @param dish
+     */
+    void update(Dish dish);
 }

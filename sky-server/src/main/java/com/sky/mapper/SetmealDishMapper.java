@@ -18,6 +18,6 @@ public interface SetmealDishMapper {
      * @param ids
      * @return
      */
-    List<Integer> getSetmealIdsByDishIds(List<Integer> ids);
+    List<Integer> getSetmealIdsByDishIds(List<Long> ids);
 
 }

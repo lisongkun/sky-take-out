@@ -3,6 +3,7 @@ package com.sky.service;
 import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.result.PageResult;
+import com.sky.vo.DishVO;
 
 import java.util.List;
 
@@ -33,5 +34,20 @@ public interface DishService {
      *
      * @param ids
      */
-    void delete(List<Integer> ids);
+    void delete(List<Long> ids);
+
+    /**
+     * 根据ID获取菜品
+     *
+     * @param id
+     * @return
+     */
+    DishVO getDishById(Long id);
+
+    /**
+     * 根据菜品信息
+     *
+     * @param dto
+     */
+    void update(DishDTO dto);
 }
