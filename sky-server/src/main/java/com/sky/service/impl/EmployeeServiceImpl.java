@@ -19,12 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
-import java.time.LocalDateTime;
+import javax.annotation.Resource;
+
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    @Autowired
+    @Resource
     private EmployeeMapper employeeMapper;
 
     /**
@@ -75,13 +76,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
         employee.setStatus(StatusConstant.ENABLE);
-
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-
-        Long empId = BaseContext.getCurrentId();
-        employee.setCreateUser(empId);
-        employee.setUpdateUser(empId);
 
         employeeMapper.add(employee);
     }
@@ -135,12 +129,6 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(EmployeeDTO dto) {
         Employee employee = new Employee();
         BeanUtils.copyProperties(dto, employee);
-
-        employee.setUpdateTime(LocalDateTime.now());
-
-        Long empId = BaseContext.getCurrentId();
-        employee.setUpdateUser(empId);
-
         employeeMapper.update(employee);
     }
 
