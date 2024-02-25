@@ -26,4 +26,6 @@ public class MessageConstant {
 
     public static final String ALREADY_EXIST = "已存在";
 
+    public static final String SHOP_STATUS = "shop_status";
+
 }
