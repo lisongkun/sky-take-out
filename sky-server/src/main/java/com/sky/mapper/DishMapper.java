@@ -6,6 +6,8 @@ import com.sky.entity.Dish;
 import com.sky.vo.DishVO;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 @Mapper
 public interface DishMapper {
 
@@ -27,6 +29,15 @@ public interface DishMapper {
     @Insert("INSERT INTO dish VALUES (null,#{name},#{categoryId},#{price},#{image},#{description},#{status},#{createTime},#{updateTime},#{createUser},#{updateUser})")
     @AutoFill
     void add(Dish dish);
+
+    /**
+     * 根据分类ID和状态查询菜品列表
+     *
+     * @param dish
+     * @return
+     */
+    @Select("select * from dish where category_id = #{categoryId} and status = #{status}")
+    List<Dish> list(Dish dish);
 
     /**
      * 分页查询结果
@@ -56,6 +67,7 @@ public interface DishMapper {
 
     /**
      * 根据菜品信息
+     *
      * @param dish
      */
     void update(Dish dish);
