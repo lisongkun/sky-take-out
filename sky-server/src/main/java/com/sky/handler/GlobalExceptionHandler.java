@@ -36,6 +36,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public Result exceptionHandler(SQLIntegrityConstraintViolationException ex) {
+        ex.printStackTrace();
         String message = ex.getMessage();
         if (message.contains("Duplicate entry")) {
             String fieldName = message.split(" ")[2];
