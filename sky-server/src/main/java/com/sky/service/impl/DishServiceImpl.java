@@ -18,6 +18,7 @@ import com.sky.vo.DishVO;
 import io.swagger.models.auth.In;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +67,7 @@ public class DishServiceImpl implements DishService {
      * @param dish
      * @return
      */
+    @Cacheable(cacheNames = "dishCache",key = "#dish.categoryId")
     public List<DishVO> listWithFlavor(Dish dish) {
         List<Dish> dishList = mapper.list(dish);
 

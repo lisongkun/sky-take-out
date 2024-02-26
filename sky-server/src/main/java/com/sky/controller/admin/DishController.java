@@ -11,6 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class DishController {
      * @return
      */
     @ApiOperation(value = "菜品添加")
+    @CacheEvict(cacheNames = "dishCache", key = "#dto.categoryId")
     @PostMapping
     public Result add(@RequestBody DishDTO dto) {
         dishService.add(dto);
@@ -63,6 +65,7 @@ public class DishController {
      * @return
      */
     @ApiOperation(value = "批量删除菜品")
+    @CacheEvict(cacheNames = "dishCache", allEntries = true)
     @DeleteMapping
     public Result delete(@RequestParam List<Long> ids) {
         dishService.delete(ids);
@@ -85,6 +88,7 @@ public class DishController {
 
     @ApiOperation(value = "修改菜品信息")
     @PutMapping
+    @CacheEvict(cacheNames = "dishCache", allEntries = true)
     public Result update(@RequestBody DishDTO dto) {
         dishService.update(dto);
         return Result.success();
