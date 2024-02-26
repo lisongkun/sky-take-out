@@ -73,6 +73,22 @@ public class DishController {
     }
 
     /**
+     * 菜品起售停售
+     *
+     * @param status
+     * @param id
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @CacheEvict(cacheNames = "dishCache", allEntries = true)
+    @ApiOperation("菜品起售停售")
+    public Result<String> startOrStop(@PathVariable Integer status, Long id) {
+        dishService.startOrStop(status, id);
+
+        return Result.success();
+    }
+
+    /**
      * 根据ID获取菜品详细信息
      *
      * @param id
