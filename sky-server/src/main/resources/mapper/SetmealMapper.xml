@@ -117,4 +117,12 @@
             </if>
         </where>
     </select>
+
+    <update id="updateStatusByIds">
+        update setmeal set status = #{status}
+        where id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

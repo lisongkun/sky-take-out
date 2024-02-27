@@ -16,6 +16,19 @@
         </set>
         where id = #{id}
     </update>
+
+    <select id="countByMap" resultType="java.lang.Integer">
+        select count(id) from dish
+        <where>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+        </where>
+    </select>
+
     <select id="page" resultType="com.sky.vo.DishVO">
         SELECT d.*,c.name as categoryName FROM dish d left join category c on d.category_id = c.id
         <where>
